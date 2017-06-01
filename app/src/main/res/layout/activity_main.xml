@@ -11,6 +11,6 @@
     tools:context="demo.zjd.com.taiwandemo.MainActivity">
 
     <demo.zjd.com.taiwandemo.ui.MapView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="400dp"
+        android:layout_height="400dp" />
 </RelativeLayout>

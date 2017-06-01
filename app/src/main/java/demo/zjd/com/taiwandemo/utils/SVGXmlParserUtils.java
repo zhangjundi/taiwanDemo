@@ -1,5 +1,6 @@
 package demo.zjd.com.taiwandemo.utils;
 
+import android.graphics.RectF;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.zjd.com.taiwandemo.bean.CityPath;
+import demo.zjd.com.taiwandemo.bean.ViewAttr;
 import demo.zjd.com.taiwandemo.calback.ParserCallBack;
 
 /**
@@ -25,16 +27,18 @@ public class SVGXmlParserUtils {
             @Override
             public void run() {
                 List<CityPath> list=new ArrayList<>();
-                parserXml(in,list);
+                ViewAttr mViewAttr=new ViewAttr();
+                parserXml(in,list,mViewAttr);
                 if(mParserCallBack!=null){
-                    mParserCallBack.callback(list);
+                    mParserCallBack.callback(list,mViewAttr);
                 }
             }
         }).start();
     }
 
-    private static void parserXml(InputStream in, List<CityPath> list){
+    private static void parserXml(InputStream in, List<CityPath> list, ViewAttr mViewAttr){
         XmlPullParser parser = Xml.newPullParser();
+        RectF mRectF=new RectF();
         try {
             parser.setInput(in, "UTF-8");
             int eventType = parser.getEventType();
@@ -58,6 +62,10 @@ public class SVGXmlParserUtils {
                         name = parser.getName();
                         if ("path".equals(name)) {
                             mCityPath.initPath();
+                            //处理path的边界
+                            //计算控制点的边界
+                            mCityPath.getmPath().computeBounds(mRectF, true);
+                            mViewAttr.colSize(mRectF);
                             list.add(mCityPath);
                         }
                         break;
