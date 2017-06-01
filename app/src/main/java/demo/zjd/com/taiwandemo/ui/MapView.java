@@ -16,7 +16,7 @@ import java.util.List;
 import demo.zjd.com.taiwandemo.R;
 import demo.zjd.com.taiwandemo.bean.CityPath;
 import demo.zjd.com.taiwandemo.calback.ParserCallBack;
-import demo.zjd.com.taiwandemo.utils.SVGXmlParserUtils1;
+import demo.zjd.com.taiwandemo.utils.SVGXmlParserUtils;
 
 /**
  * Created by zhangjd on 2017/6/1.
@@ -46,7 +46,7 @@ public class MapView extends View implements ParserCallBack {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         //解析svg xml
-        SVGXmlParserUtils1.parserXml(getResources().openRawResource(R.raw.china), this);
+        SVGXmlParserUtils.parserXml(getResources().openRawResource(R.raw.taiwan), this);
     }
 
     @Override
