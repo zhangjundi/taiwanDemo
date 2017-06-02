@@ -13,33 +13,21 @@ public class ViewAttr {
     private Float bottom;
 
     public int getWidth() {
-        if(left==null||right==null)
+        if (left == null || right == null)
             return 0;
         return (int) Math.abs(left - right);
     }
 
     public int getHeight() {
-        if(top==null||bottom==null)
+        if (top == null || bottom == null)
             return 0;
         return (int) Math.abs(top - bottom);
     }
 
     public void colSize(RectF mRectF) {
-        if (left == null)
-            left = mRectF.left;
-        else
-            left = Math.min(mRectF.left, left);
-        if (top == null)
-            top = mRectF.top;
-        else
-            top = Math.min(mRectF.top, top);
-        if (right == null)
-            right = mRectF.right;
-        else
-            right = Math.max(mRectF.right, right);
-        if (bottom == null)
-            bottom = mRectF.bottom;
-        else
-            bottom = Math.max(mRectF.bottom, bottom);
+        left = left == null ? mRectF.left : Math.min(mRectF.left, left);
+        top = top == null ? mRectF.top : Math.min(mRectF.top, top);
+        right = right == null ? mRectF.right : Math.max(mRectF.right, right);
+        bottom = bottom == null ? mRectF.bottom : Math.max(mRectF.bottom, bottom);
     }
 }
